@@ -1,0 +1,8 @@
+.walks-container {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
