@@ -1,4 +1,4 @@
-import {WalkIntf} from "./WalkIntf";
+import { WalkIntf } from "./WalkIntf";
 
 export interface WalksListPropsIntf {
   items: WalkIntf[],

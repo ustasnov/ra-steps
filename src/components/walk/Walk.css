@@ -1,6 +1,7 @@
 .walk-container {
   display: flex;
   margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .walk-date {
@@ -8,18 +9,25 @@
 }
 
 .walk-distance {
-  width: 100px;
+  width: 70px;
+  text-align: right;
 }
 
 .btn-container {
-  width: 200px;
+  width: 230px;
   display: flex;
   justify-content: flex-end;
 }
 
 .btn {
-  width: 10px;
-  height: 10px;
+  font-size: inherit;
   border-width: 0;
   margin-left: 5px;
+  background-color: white;
+}
+
+.btn:hover {
+  color: white;
+  background-color: cadetblue;
+  border-radius: 3px;
 }

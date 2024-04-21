@@ -1,8 +1,14 @@
 .walks-container {
-  width: 100%;
+  width: auto;
+  box-sizing: border-box;
   height: 400px;
+  min-height: 300px;
+  min-width: 532px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  overflow-y: auto;
+  padding: 18px;
+  margin-top: 15px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  overflow-y: scroll;
 }
