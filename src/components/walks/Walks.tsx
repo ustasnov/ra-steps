@@ -7,6 +7,7 @@ import "./Walks.css";
 export const Walks = () => {
   const [data, setState] = useState(Storage.loadData());
   const [formData, setData] = useState({ date: getDateStr(new Date()), distance: "0" });
+  const [mode, setMode] = useState("add");
 
   const onEditHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ export const Walks = () => {
     const walkDistanceStr = walkEl?.querySelector(".walk-distance")?.textContent;
     if (walkDateStr && walkDistanceStr) {
       setData({ date: walkDateStr, distance: walkDistanceStr });
+      setMode("edit");
     };
   }
 
@@ -30,7 +32,8 @@ export const Walks = () => {
 
     const newData = data.slice();
     const idx = newData.findIndex((el => el.date.getTime() === new Date(dateStr).getTime()));
-    if (idx && idx > -1) {
+    
+    if (idx > -1) {
       newData.splice(idx, 1);
       Storage.saveData(newData);
       setState(newData);
@@ -56,18 +59,27 @@ export const Walks = () => {
     const newData = data.slice();
     const walk = newData.find((el => el.date.getTime() === new Date(walkDate).getTime()));
     if (walk) {
-      walk.distance += walkDistance;
+      if (mode === "add") { 
+        walk.distance += walkDistance; 
+      } else {
+        walk.distance = walkDistance; 
+      }
     } else {
       newData.push({ date: walkDate, distance: walkDistance });
     }
 
     Storage.saveData(newData);
     setState(Storage.sort(newData));
+    setMode("add");
   }
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setData(prevFormData => ({ ...prevFormData, [name]: value }));
+    let val = value;
+    if (name === "distance" && value.indexOf(".") != -1) { 
+      val = val.substring(0, value.indexOf(".") + 2);
+    }
+    setData(prevFormData => ({ ...prevFormData, [name]: val }));
   }
 
   return (
